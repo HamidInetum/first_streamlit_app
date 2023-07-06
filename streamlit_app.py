@@ -40,3 +40,6 @@ my_d=my_cur.fetchall() #fetchone
 streamlit.text("The fruit load list conains")
 streamlit.dataframe(my_d)
                
+# adding fruits
+added_fruit=streamlit.text_input("What fruit would you like to add ?");
+streamlit.text("Thanks for adding the the ",added_fruit);
