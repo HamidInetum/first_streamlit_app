@@ -17,7 +17,11 @@ streamlit.dataframe(fruits_to_show)
 
 # New Section to display fruityvice API response
 streamlit.header('Fruityvice Fruit Advice')
-fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/watermelon")
+fruit_choice = streamlit.text_input('What kind of fruits would you like infos about ?','Kiwi');
+streamlit.write('The user entered',fruit_choice);
+
+
+fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+fruit_choice);
 # streamlit.text(fruityvice_response.json());
 
 fruityvice_norm = pandas.json_normalize(fruityvice_response.json());
