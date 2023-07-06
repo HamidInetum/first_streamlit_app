@@ -38,13 +38,7 @@ except URLError as e:
   streamlit.error()
 
 
-
-
-#my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-#my_data_row = my_cur.fetchone()
-#streamlit.text("Hello from Snowflake:")
-#streamlit.text(my_data_row)
-streamlit.text("The fruit load list conains")
+streamlit.title('View our fruit list - Add your favorites!')
 
 def get_fruit_load_list():
   with my_cnx.cursor() as my_cur:
@@ -53,6 +47,7 @@ def get_fruit_load_list():
 if streamlit.button('Get Fruit Load list'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows=get_fruit_load_list()
+  my_cnx.close()
   streamlit.dataframe(my_data_rows)
 
 
@@ -64,6 +59,8 @@ added_fruit=streamlit.text_input("What fruit would you like to add ?");
 if streamlit.button('Add a fruit to the list'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   back_f=insert_row_snowflake(added_fruit)
+  my_cnx.close()
+
   streamlit.text(back_f)
 
 
