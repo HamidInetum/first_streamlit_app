@@ -38,5 +38,5 @@ my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
 my_d=my_cur.fetchone()
 streamlit.text("The fruit load list conains")
-streamlit.text(my_d)
+streamlit.dataframe(my_d)
                
