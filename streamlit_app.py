@@ -20,15 +20,18 @@ streamlit.dataframe(fruits_to_show)
 
 # New Section to display fruityvice API response
 streamlit.header('Fruityvice Fruit Advice')
-fruit_choice = streamlit.text_input('What kind of fruits would you like infos about ?','Kiwi');
+try:
+fruit_choice = streamlit.text_input('What kind of fruits would you like infos about ?');
+  if not added_fruit:
+    streamlit.error("Please select a fruit to get information")
+  else:
 streamlit.write('The user entered',fruit_choice);
-
-
 fruityvice_response = requests.get("https://www.fruityvice.com/api/fruit/"+fruit_choice);
 # streamlit.text(fruityvice_response.json());
-
 fruityvice_norm = pandas.json_normalize(fruityvice_response.json());
 streamlit.dataframe(fruityvice_norm);
+except URLError as e:
+streamlit.error()
 
 streamlit.stop()
 
@@ -44,7 +47,8 @@ streamlit.text("The fruit load list conains")
 streamlit.dataframe(my_d)
                
 # adding fruits
-added_fruit=streamlit.text_input("What fruit would you like to add ?");
+  added_fruit=streamlit.text_input("What fruit would you like to add ?");
+
 streamlit.write("Thanks for adding the ",added_fruit);
 
 my_cur.execute("insert into fruit_load_list values('from streamlit')")
