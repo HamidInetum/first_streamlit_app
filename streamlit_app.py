@@ -76,5 +76,4 @@ streamlit.dataframe(my_d)
 # adding fruits
 
 
-streamlit.write);
 
